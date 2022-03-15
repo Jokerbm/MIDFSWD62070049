@@ -26,9 +26,9 @@ function Author() {
       let getuser = await axios.get(
         "https://fswd-wp.devnss.com/wp-json/wp/v2/users"
       );
-      let fuck = await setposts(getdata.data);
-      let fuck2 = await setuser(getuser.data);
-      let fuck3 = await setloading(false);
+      await setposts(getdata.data);
+      await setuser(getuser.data);
+      await setloading(false);
     }
 
     fetchMyAPI();
