@@ -6,26 +6,29 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
+import { useParams, useResolvedPath } from "react-router-dom";
 import Footer from "./footer";
 
 import "./App.css";
 var dayjs = require("dayjs");
 
-function App() {
+function Author() {
   const [post, setposts] = useState([]);
   const [user, setuser] = useState([]);
   const [loading, setloading] = useState(true);
+  let { id } = useParams();
+
   useEffect(() => {
     async function fetchMyAPI() {
       let getdata = await axios.get(
-        "https://fswd-wp.devnss.com/wp-json/wp/v2/posts?per_page=100"
+        "https://fswd-wp.devnss.com/wp-json/wp/v2/posts?author=" + id
       );
       let getuser = await axios.get(
         "https://fswd-wp.devnss.com/wp-json/wp/v2/users"
       );
-      let fufu = await setposts(getdata.data);
-      let fufu2 = await setuser(getuser.data);
-      let fufu3 = await setloading(false);
+      let fuck = await setposts(getdata.data);
+      let fuck2 = await setuser(getuser.data);
+      let fuck3 = await setloading(false);
     }
 
     fetchMyAPI();
@@ -40,15 +43,15 @@ function App() {
     // console.log(comment);
 
     return (
-      <div id="layout" className="pure-g" style={{ width: "100%" }}>
+      <div id="layout" className="pure-g">
         <Sidebar />
 
         <div
-          className="content pure-u-2-3 pure-u-md-3-4"
-          // style={{ width: "75%" }}
+          className="content pure-u-1 pure-u-md-3-4"
+          style={{ width: "75%" }}
         >
           <div>
-            <h1 className="content-subhead">Post</h1>
+            <h1 className="content-subhead">USER: {user[id - 1].name}</h1>
 
             {post.map((num) => (
               <div className="posts" key={num.id}>
@@ -60,10 +63,16 @@ function App() {
 
                     <p className="post-meta">
                       By{" "}
-                      <a href={"author/" + num.author} className="post-author">
+                      <a href={"/author/" + num.author} className="post-author">
                         {user[num.author - 1].name}
                       </a>{" "}
                       {dayjs(num.date).format("YYYY-MMMM-DD")}{" "}
+                      {/* <a class="post-category post-category-design" href="#">
+                        CSS
+                      </a>{" "}
+                      <a class="post-category post-category-pure" href="#">
+                        Pure
+                      </a> */}
                     </p>
                   </header>
 
@@ -88,4 +97,4 @@ function App() {
     );
   }
 }
-export default App;
+export default Author;
