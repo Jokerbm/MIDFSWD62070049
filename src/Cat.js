@@ -6,7 +6,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
-import { useParams, useResolvedPath } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Footer from "./footer";
 
 import "./App.css";
@@ -30,10 +30,10 @@ function Cat() {
       let gettags = await axios.get(
         "https://fswd-wp.devnss.com/wp-json/wp/v2/categories"
       );
-      let fuck = await setposts(getdata.data);
-      let fuck2 = await setuser(getuser.data);
+      await setposts(getdata.data);
+      await setuser(getuser.data);
       await settag(gettags.data);
-      let fuck3 = await setloading(false);
+      await setloading(false);
     }
 
     fetchMyAPI();
