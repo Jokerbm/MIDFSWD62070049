@@ -6,7 +6,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
-import { useParams, useResolvedPath } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import Footer from "./footer";
 
 import "./App.css";
@@ -17,6 +17,7 @@ function Author() {
   const [user, setuser] = useState([]);
   const [loading, setloading] = useState(true);
   let { id } = useParams();
+  
 
   useEffect(() => {
     async function fetchMyAPI() {

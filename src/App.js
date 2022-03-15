@@ -23,9 +23,9 @@ function App() {
       let getuser = await axios.get(
         "https://fswd-wp.devnss.com/wp-json/wp/v2/users"
       );
-      let fufu = await setposts(getdata.data);
-      let fufu2 = await setuser(getuser.data);
-      let fufu3 = await setloading(false);
+      await setposts(getdata.data);
+      await setuser(getuser.data);
+      await setloading(false);
     }
 
     fetchMyAPI();
